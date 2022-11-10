@@ -15,7 +15,7 @@ which will just open the Screen Mirroring dropdown.
 
 OR
 
-Run osascript ``open_airplay_menu.scpt "example Device Name"``
+Run ``osascript open_airplay_menu.scpt "example Device Name"``
 
 which will open the Screen Mirroring dropdown and select the passed device name. 
 
