@@ -1,4 +1,4 @@
-# Auto Open Screen Mirroring
+# Auto Open Screen Mirroring #
 AppleScript to open the "Screen Mirroring" dropdown. 
 It will work if the icon has been dragged on to the menubar or if it's still under the "Control Center" dropdown menu.
 The script accepts an optional commandline argument if you want to connect to a specified device in the Screen Mirroring dropdown.
@@ -30,3 +30,6 @@ The Screen Mirroring checkbox here instead has an "action 2" or "action 1" that 
 
 ### Notes ###
 You may need to give both **osascript** and your **terminal app** "Acessibility" access under "Security and Privacy" in "System Preferences"
+
+#### Tested ####
+MacOS: 12.0.1 & 11.1
