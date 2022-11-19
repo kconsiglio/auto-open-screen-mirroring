@@ -21,17 +21,23 @@ end repeat
 
 tell application "System Events"
 	tell its application process "ControlCenter"
+		set OSVersion to get system version of (system info)
+		# Skip this section if on Ventura
+		
 		-- first check if the Screen Mirroring item is on the menu bar and if it is click it
 		if exists menu bar item "Screen Mirroring" of menu bar 1 then
 			-- open Screen Mirroring drop down
 			click menu bar item "Screen Mirroring" of menu bar 1
 			delay 1
+			
 			-- interact with the Screen Mirroring drop down
 			tell item 1 of window "Control Center"
 				try
 					-- montery
+					
 					if exists (checkbox airPlayDevice of scroll area 1) then
 						set computerCheck to scroll area 1
+						
 					else
 						-- big sur
 						if exists (checkbox airPlayDevice of scroll area 1 of group 1) then
@@ -54,26 +60,49 @@ tell application "System Events"
 			-- the "click" action doesn't work on the Screen Mirroring item (which is a checkbox) in the Control Center drop down
 			-- the Screen Mirroring item has a "action 2" or "action 1" depending on system version. 
 		else
-			-- click the Control Center menu item
-			click menu bar item "Control Center" of menu bar 1
-			delay 1
-			tell its window "Control Center"
-				-- click the Screen Mirroring item (checkbox) on the Control Center drop down
-				if exists checkbox "Screen Mirroring" then
-					tell its checkbox "Screen Mirroring"
-						perform action 2
-						delay 1
+			
+			-- click the Control Center menu bar item (montery/bigsur)
+			if OSVersion < 13 then
+				click menu bar item "Control Center" of menu bar 1
+			-- click the Control Center menu bar item  (ventura)
+			else if OSVersion ³ 13 then
+				tell its menu bar 1
+					tell (UI elements whose description is "Control Center")
+						click
 					end tell
-				else
-					-- slightly different for Big Sur
-					if exists (checkbox "Screen Mirroring" of group 1 of group 1) then
-						tell its checkbox "Screen Mirroring" of group 1 of group 1
-							perform action 1
+				end tell
+			end if
+
+			delay 1
+
+			tell its window "Control Center"
+				-- Big Sur and Monterey 
+				if OSVersion < 13 then
+	            	-- click the Screen Mirroring item (checkbox) on the Control Center drop down
+					if exists checkbox "Screen Mirroring" then
+						tell its checkbox "Screen Mirroring"
+							perform action 2
 							delay 1
 						end tell
+					else
+						-- slightly different for Big Sur
+						if exists (checkbox "Screen Mirroring" of group 1 of group 1) then
+							tell its checkbox "Screen Mirroring" of group 1 of group 1
+								perform action 1
+								delay 1
+							end tell
+						end if
 					end if
+				-- Ventura "click" screen mirroring button on the Control Center drop down
+				else if OSVersion ³ 13 then
+					set screenMirroringButton to button 2 of group 1
+					perform action 1 of screenMirroringButton
 				end if
+
 				-- Click the Airplay Device in the Screen Mirroring drop down. 
+				--set screenMirroringDropDown to UI elements of its scroll area 1
+				--log screenMirroringDropDown
+				
 				try
 					set screenMirroringDropDown to UI element 2
 					set device to UI element airPlayDevice of screenMirroringDropDown
