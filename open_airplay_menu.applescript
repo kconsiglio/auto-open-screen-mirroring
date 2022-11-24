@@ -9,6 +9,7 @@ use framework "Foundation"
 use scripting additions
 
 
+
 -- passing commandline argument 
 -- https://stackoverflow.com/questions/57690558/compile-applescript-into-application-with-parameters
 set arguments to (current application's NSProcessInfo's processInfo's arguments) as list
@@ -23,12 +24,15 @@ tell application "System Events"
 	tell its application process "ControlCenter"
 		set OSVersion to get system version of (system info)
 		# Skip this section if on Ventura
+		set menuItems to menu bar items of menu bar 1
+		--clickScreenMirroringInMenuBar(menuItems) of me
 		
 		-- first check if the Screen Mirroring item is on the menu bar and if it is click it
 		if exists menu bar item "Screen Mirroring" of menu bar 1 then
 			-- open Screen Mirroring drop down
-			click menu bar item "Screen Mirroring" of menu bar 1
-			delay 1
+			-- click menu bar item "Screen Mirroring" of menu bar 1
+			-- delay 1
+			
 			
 			-- interact with the Screen Mirroring drop down
 			tell item 1 of window "Control Center"
@@ -64,7 +68,7 @@ tell application "System Events"
 			-- click the Control Center menu bar item (montery/bigsur)
 			if OSVersion < 13 then
 				click menu bar item "Control Center" of menu bar 1
-			-- click the Control Center menu bar item  (ventura)
+				-- click the Control Center menu bar item  (ventura)
 			else if OSVersion ³ 13 then
 				tell its menu bar 1
 					tell (UI elements whose description is "Control Center")
@@ -72,13 +76,13 @@ tell application "System Events"
 					end tell
 				end tell
 			end if
-
+			
 			delay 1
-
+			
 			tell its window "Control Center"
 				-- Big Sur and Monterey 
 				if OSVersion < 13 then
-	            	-- click the Screen Mirroring item (checkbox) on the Control Center drop down
+					-- click the Screen Mirroring item (checkbox) on the Control Center drop down
 					if exists checkbox "Screen Mirroring" then
 						tell its checkbox "Screen Mirroring"
 							perform action 2
@@ -93,16 +97,17 @@ tell application "System Events"
 							end tell
 						end if
 					end if
-				-- Ventura "click" screen mirroring button on the Control Center drop down
+					-- Ventura 
 				else if OSVersion ³ 13 then
+					-- "click" screen mirroring button on the Control Center drop down
 					set screenMirroringButton to button 2 of group 1
 					perform action 1 of screenMirroringButton
 				end if
-
+				
 				-- Click the Airplay Device in the Screen Mirroring drop down. 
 				--set screenMirroringDropDown to UI elements of its scroll area 1
 				--log screenMirroringDropDown
-				
+				click UI element "Roku Premiere    YR002C896366" of UI element 2
 				try
 					set screenMirroringDropDown to UI element 2
 					set device to UI element airPlayDevice of screenMirroringDropDown
@@ -114,6 +119,22 @@ tell application "System Events"
 		end if
 	end tell
 end tell
+
+on clickScreenMirroringInMenuBar(menuItems)
+	-- first check if the Screen Mirroring item is on the menu bar and if it is click it
+	set menuItems to items of menuItems
+	-- first check if the Screen Mirroring item is on the menu bar and if it is click it
+	if (exists item "Screen Mirroring" of menuItems) then
+		-- open Screen Mirroring drop down
+		-- click menu bar item "Screen Mirroring" of menu bar 1
+		-- delay 1
+	end if
+	
+	
+	
+end clickScreenMirroringInMenuBar
+
+
 return
 
 
