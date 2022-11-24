@@ -102,7 +102,7 @@ tell application "System Events"
 				-- Click the Airplay Device in the Screen Mirroring drop down. 
 				--set screenMirroringDropDown to UI elements of its scroll area 1
 				--log screenMirroringDropDown
-				
+				-- Won't work on Ventura
 				try
 					set screenMirroringDropDown to UI element 2
 					set device to UI element airPlayDevice of screenMirroringDropDown
