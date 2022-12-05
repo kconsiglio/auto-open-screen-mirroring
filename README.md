@@ -30,6 +30,7 @@ The Screen Mirroring checkbox here instead has an "action 2" or "action 1" that 
 
 ### Notes ###
 You may need to give both **osascript** and your **terminal app** "Acessibility" access under "Security and Privacy" in "System Preferences"
+Currently only has partial support for Ventura. Script will open Control Center and and click Screen Mirroring but is unable to currently click a device. 
 
 #### Tested ####
-MacOS: 12.0.1 & 11.1
+MacOS: 11.1,12.0.1,12.6,13.0.1
