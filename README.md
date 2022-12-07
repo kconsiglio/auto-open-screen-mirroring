@@ -32,7 +32,7 @@ The Screen Mirroring checkbox here instead has an "action 2" or "action 1" that 
 You may need to give both **osascript** and your **terminal app** "Acessibility" access under "Security and Privacy" in "System Preferences"
 Script should now be able to handle different languages. 
 
-Only partially tested on Ventura. 
+I'm not super familiar with applescript, this was done mostly for fun and to see if it was possible. 
 
 #### Tested ####
 MacOS: 11.1,12.0.1,12.6,13.0.1
