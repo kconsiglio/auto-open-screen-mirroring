@@ -110,8 +110,12 @@ on getScreenMirroringDropDown(osVersion, airPlayDevice, window_)
 				set screenMirroringDropDown to ""
 				try
 					-- get ui elements of screen mirroring drop down
-					-- Monterey and Ventura
-					if osVersion ³ 12 then
+					-- Ventura
+					if osVersion ³ 13 then
+						set x to UI elements --?? if in menu bar this is needed ??
+						set screenMirroringDropDown to UI elements of group 1
+					-- Monterey
+					else if osVersion < 13 and osVersion ³ 12 then
 						set x to UI elements --?? if in menu bar this is needed ??
 						set screenMirroringDropDown to UI elements
 						-- big sur
