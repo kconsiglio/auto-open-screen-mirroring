@@ -132,17 +132,17 @@ on getScreenMirroringDropDown(osVersion, airPlayDevice, window_)
 				
 				repeat with anItem in screenMirroringDropDown
 					try
-						
+						log anItem
 						set itemsOfScreenMirroringMenu to value of attribute "AXChildren" of anItem
 						-- find screen mirroring device and click
 						repeat with childItem in itemsOfScreenMirroringMenu
 							
 							if (exists attribute "AXIdentifier" of childItem) then
 								set aScreenMirroringItem to value of attribute "AXIdentifier" of childItem
-								--	log aScreenMirroringItem
+								log aScreenMirroringItem
 							else
 								set aScreenMirroringItem to title of childItem
-								--	log aScreenMirroringItem
+								log aScreenMirroringItem
 							end if
 							if aScreenMirroringItem ends with airPlayDevice then
 								click childItem
